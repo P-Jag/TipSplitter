@@ -16,15 +16,34 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var twentyPtcButton: UIButton!
     @IBOutlet weak var splitNumberLabel: UILabel!
     
+    var tip = 0.10
+    var persons = 2
+    
     @IBAction func tipChanged(_ sender: UIButton) {
+        
+        zeroPtcButton.isSelected = false
+        tenPtcButton.isSelected = false
+        twentyPtcButton.isSelected = false
+        
+        sender.isSelected = true
+        
+        let btnTitle = sender.currentTitle!
+        let btnWithoutPercentage = String(btnTitle.dropLast())
+        let btnTitleAsNumber = Double(btnWithoutPercentage)!
+        
+        tip = btnTitleAsNumber / 100
     }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        print("Number of persons changed")
+        persons = Int(sender.value)
+        splitNumberLabel.text = String(persons)
+        
+        sender.maximumValue = 12.0
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        print("Bill is splitted now")
+        print(tip)
+        print(persons)
     }
     
 }
